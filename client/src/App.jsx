@@ -1,11 +1,9 @@
-import "./App.css"
-
 function App() {
   return (
     <>
-      <div></div>
+      <div className="flex items-center justify-center h-screen">HELLO</div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
