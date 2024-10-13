@@ -1,4 +1,5 @@
 import PDFSearch from "../components/PDFSearch";
+import Header from "../components/Header.jsx";
 
 export default function DocViewer({
   file,
@@ -8,6 +9,7 @@ export default function DocViewer({
 }) {
   return (
     <div>
+      <Header />
       <PDFSearch
         file={file}
         query={query}
