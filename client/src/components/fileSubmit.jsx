@@ -40,7 +40,7 @@ export default function FileSubmit({
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
+      <div className="bg-white p-6 rounded shadow-md w-full max-w-md">
         <h2 className="text-2xl font-bold mb-6 text-center">Upload PDF</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
@@ -77,7 +77,7 @@ export default function FileSubmit({
 
           <button
             type="submit"
-            className="w-full bg-[#3c799a] text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full bg-[#3c799a] text-white py-2 px-4 rounded hover:bg-[#3c799a] focus:outline-none focus:ring-2 focus:ring-[#3c799a]"
           >
             Submit
           </button>
