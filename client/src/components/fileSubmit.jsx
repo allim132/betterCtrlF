@@ -39,7 +39,7 @@ export default function FileSubmit({
   }
 
   return (
-    <div className="flex items-center justify-center bg-white">
+    <div className="flex items-center justify-center bg-white pb-12">
       <div className="bg-gray-200 p-6 rounded shadow-md w-full max-w-md">
         <h2 className="text-2xl font-bold mb-6 text-center">Upload PDF</h2>
         <form onSubmit={handleSubmit}>
