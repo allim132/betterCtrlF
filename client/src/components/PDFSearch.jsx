@@ -1,56 +1,63 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
+
+const highlightWords = (content) => {
+  return content.replace(
+    /\*\*(.*?)\*\*/g,
+    '<span class="bg-yellow-200 px-1 rounded">$1</span>'
+  )
+}
 
 function PDFSearch({ file, query, hasBeenSubmitted, setHasSubmitted }) {
-  const [results, setResults] = useState([]);
-  const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [results, setResults] = useState([])
+  const [error, setError] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const handleProcessing = async () => {
-    setIsLoading(true);
-    setError(null);
+    setIsLoading(true)
+    setError(null)
 
     if (!file || !query) {
-      setError("Please select a PDF file and enter a search query.");
-      setIsLoading(false);
-      return;
+      setError("Please select a PDF file and enter a search query.")
+      setIsLoading(false)
+      return
     }
 
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("query", query);
+    const formData = new FormData()
+    formData.append("file", file)
+    formData.append("query", query)
 
     try {
       const response = await fetch("http://localhost:5000/api/search", {
         method: "POST",
         body: formData,
-      });
+      })
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        throw new Error(`HTTP error! status: ${response.status}`)
       }
-      const data = await response.json();
-      setResults(data.results);
+      const data = await response.json()
+      setResults(data.results)
     } catch (error) {
-      console.error("Fetch error:", error);
-      setError("Failed to fetch. Please check your connection and try again.");
+      console.error("Fetch error:", error)
+      setError("Failed to fetch. Please check your connection and try again.")
     } finally {
-      setIsLoading(false);
+      setIsLoading(false)
     }
-  };
+  }
 
   const handleReturn = (e) => {
-    e.preventDefault();
-    setHasSubmitted(false);
-    navigate("/");
-  };
+    e.preventDefault()
+    setHasSubmitted(false)
+    navigate("/")
+  }
 
   useEffect(() => {
     if (hasBeenSubmitted) {
-      handleProcessing();
+      handleProcessing()
     }
-  }, [hasBeenSubmitted]);
+  }, [hasBeenSubmitted])
 
   return (
     <div>
@@ -76,7 +83,9 @@ function PDFSearch({ file, query, hasBeenSubmitted, setHasSubmitted }) {
               </p>
               <div
                 className="prose prose-sm max-w-none"
-                dangerouslySetInnerHTML={{ __html: result.highlighted_content }}
+                dangerouslySetInnerHTML={{
+                  __html: highlightWords(result.highlighted_content),
+                }}
               />
             </div>
           ))}
@@ -93,7 +102,7 @@ function PDFSearch({ file, query, hasBeenSubmitted, setHasSubmitted }) {
         </button>
       </form>
     </div>
-  );
+  )
 }
 
-export default PDFSearch;
+export default PDFSearch
