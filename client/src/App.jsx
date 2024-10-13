@@ -35,6 +35,7 @@ function App() {
                   file={file}
                   query={userText}
                   hasBeenSubmitted={hasSubmitted}
+                  setHasSubmitted={setHasSubmitted}
                 />
               }
             />

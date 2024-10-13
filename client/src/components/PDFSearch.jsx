@@ -1,12 +1,14 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 
-function PDFSearch({ file, query, hasBeenSubmitted }) {
+function PDFSearch({ file, query, hasBeenSubmitted, setHasSubmitted }) {
   const [results, setResults] = useState([])
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
+  const navigate = useNavigate()
+
+  const handleProcessing = async () => {
     setIsLoading(true)
     setError(null)
 
@@ -38,18 +40,20 @@ function PDFSearch({ file, query, hasBeenSubmitted }) {
     }
   }
 
+  const handleReturn = (e) => {
+    e.preventDefault()
+    setHasSubmitted(false)
+    navigate("/")
+  }
+
+  useEffect(() => {
+    if (hasBeenSubmitted) {
+      handleProcessing()
+    }
+  }, [hasBeenSubmitted])
+
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <button
-          type="submit"
-          disabled={isLoading}
-          className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        >
-          {isLoading ? "Searching..." : "Search"}
-        </button>
-      </form>
-
       {error && <p style={{ color: "red" }}>{error}</p>}
 
       {isLoading && <p>Loading...</p>}
@@ -68,6 +72,16 @@ function PDFSearch({ file, query, hasBeenSubmitted }) {
           ))}
         </div>
       )}
+
+      <form onSubmit={handleReturn}>
+        <button
+          type="submit"
+          disabled={isLoading}
+          className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          Return to home
+        </button>
+      </form>
     </div>
   )
 }
