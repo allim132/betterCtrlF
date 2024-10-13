@@ -1,5 +1,5 @@
-import React, { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function FileSubmit({
   handleSetFileName,
@@ -7,36 +7,36 @@ export default function FileSubmit({
   handleSetFile,
   handleSetUserText,
 }) {
-  const navigate = useNavigate()
-  const [userText, setUserText] = useState("")
-  const [file, setFile] = useState(null)
+  const navigate = useNavigate();
+  const [userText, setUserText] = useState("");
+  const [file, setFile] = useState(null);
 
   const handleFileChange = (event) => {
-    setFile(event.target.files[0])
-  }
+    setFile(event.target.files[0]);
+  };
 
   const handleTextChange = (event) => {
-    setUserText(event.target.value)
-  }
+    setUserText(event.target.value);
+  };
 
   const handleSubmit = (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
     if (file) {
-      handleSetFileName(file.name)
-      handleSetFile(file)
-      handleHasSubmitted(true)
-      handleSetUserText(userText)
+      handleSetFileName(file.name);
+      handleSetFile(file);
+      handleHasSubmitted(true);
+      handleSetUserText(userText);
 
-      console.log("File submitted:", file)
-      console.log("User text:", userText)
+      console.log("File submitted:", file);
+      console.log("User text:", userText);
 
       // Navigate to the docviewer page
-      navigate("/docviewer")
+      navigate("/docviewer");
     } else {
-      console.log("No file selected")
+      console.log("No file selected");
     }
-  }
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -77,12 +77,12 @@ export default function FileSubmit({
 
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full bg-[#3c799a] text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             Submit
           </button>
         </form>
       </div>
     </div>
-  )
+  );
 }
