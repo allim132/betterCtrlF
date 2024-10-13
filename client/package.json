@@ -13,6 +13,8 @@
     "@fileforge/pdfreader": "^0.1.43",
     "@react-pdf-viewer/core": "^3.12.0",
     "@react-pdf-viewer/default-layout": "^3.12.0",
+    "pdfjs": "^2.5.3",
+    "pdfjs-dist": "^4.7.76",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },

@@ -6,20 +6,26 @@ export default function FileSubmit({
   handleSetFile,
 }) {
   const [file, setFile] = useState(null)
+  const [userText, setUserText] = useState("") // New state for user text input
 
   const handleFileChange = (event) => {
     setFile(event.target.files)
+  }
+
+  const handleTextChange = (event) => {
+    setUserText(event.target.value) // Update state with user input
   }
 
   const handleSubmit = (event) => {
     event.preventDefault()
 
     if (file) {
-      handleSetFileName(file[0].name)
+      handleSetFileName(file.name)
       handleSetFile(file)
       handleHasSubmitted(true)
 
       console.log("File submitted:", file)
+      console.log("User text:", userText) // Log the user input text
     } else {
       console.log("No file selected")
     }
@@ -42,6 +48,22 @@ export default function FileSubmit({
               id="pdf"
               accept="application/pdf"
               onChange={handleFileChange}
+              className="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
+          <div className="mb-4">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="userText"
+            >
+              Enter Prompt
+            </label>
+            <input
+              type="text"
+              id="userText"
+              value={userText}
+              onChange={handleTextChange}
               className="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
