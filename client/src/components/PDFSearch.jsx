@@ -1,5 +1,12 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+
+const highlightWords = (content) => {
+  return content.replace(
+    /\*\*(.*?)\*\*/g,
+    '<span class="bg-yellow-200 px-1 rounded">$1</span>'
+  );
+};
 import Sidebar from "./sidebar.jsx";
 
 function PDFSearch({ file, query, hasBeenSubmitted, setHasSubmitted }) {
@@ -131,7 +138,7 @@ function PDFSearch({ file, query, hasBeenSubmitted, setHasSubmitted }) {
                 <div
                   className="prose prose-sm max-w-none"
                   dangerouslySetInnerHTML={{
-                    __html: result.highlighted_content,
+                    __html: highlightWords(result.highlighted_content),
                   }}
                 />
               </div>
