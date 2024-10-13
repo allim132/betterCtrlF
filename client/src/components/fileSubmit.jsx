@@ -1,6 +1,10 @@
 import React, { useState } from "react"
 
-export default function FileSubmit() {
+export default function FileSubmit({
+  handleSetFileName,
+  handleHasSubmitted,
+  handleSetFile,
+}) {
   const [file, setFile] = useState(null)
 
   const handleFileChange = (event) => {
@@ -10,10 +14,11 @@ export default function FileSubmit() {
   const handleSubmit = (event) => {
     event.preventDefault()
 
-    setHasSubmitted(true)
-
     if (file) {
-      // Handle file upload logic here
+      handleSetFileName(file[0].name)
+      handleSetFile(file)
+      handleHasSubmitted(true)
+
       console.log("File submitted:", file)
     } else {
       console.log("No file selected")
