@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 const highlightWords = (content) => {
   return content.replace(
     /\*\*(.*?)\*\*/g,
-    '<span class="bg-yellow-200 px-1 rounded">$1</span>'
+    '<span class="bg-[#f1cb88] px-1 rounded">$1</span>'
   );
 };
 import Sidebar from "./sidebar.jsx";
@@ -106,13 +106,13 @@ function PDFSearch({ file, query, hasBeenSubmitted, setHasSubmitted }) {
 
         {results.length > 0 && (
           <div className="bg-gray-100 rounded-lg p-6 mt-6 shadow-md">
-            <h2 className="text-2xl font-bold mb-4 pb-2 border-b-2 border-blue-500 text-gray-800">
+            <h2 className="text-2xl font-bold mb-4 pb-2 border-b-2 border-[#85a6c7] text-gray-800">
               Search Results:
             </h2>
             <div className="flex justify-between items-center mb-4 bg-white p-2 rounded-md shadow-sm">
               <button
                 onClick={() => setSidebarOpen(!sidebarOpen)}
-                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
+                className="px-4 py-2 bg-[#3c799a] text-white rounded hover:bg-[#3c799a] transition-colors"
               >
                 {sidebarOpen ? "Hide Sidebar" : "Show Sidebar"}
               </button>
@@ -129,7 +129,7 @@ function PDFSearch({ file, query, hasBeenSubmitted, setHasSubmitted }) {
                 ref={(el) => (pageRefs.current[result.page_index] = el)}
                 className="bg-white rounded-md p-4 mb-4 shadow-sm hover:shadow-md transition-shadow duration-300"
               >
-                <h3 className="text-lg font-semibold text-blue-600 mb-2">
+                <h3 className="text-lg font-semibold text-[#3c799a] mb-2">
                   Page {result.page_index + 1}
                 </h3>
                 <p className="text-sm text-gray-600 mb-2">
@@ -150,7 +150,7 @@ function PDFSearch({ file, query, hasBeenSubmitted, setHasSubmitted }) {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full bg-[#3c799a] text-white py-2 px-4 rounded hover:bg-[#3c799a] focus:outline-none focus:ring-2 focus:ring-[#3c799a]"
           >
             Return to home
           </button>
