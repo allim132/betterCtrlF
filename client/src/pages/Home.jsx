@@ -5,6 +5,7 @@ export default function Home({
   handleSetFileName,
   handleHasSubmitted,
   handleSetFile,
+  handleSetUserText,
 }) {
   return (
     <div>
@@ -16,6 +17,7 @@ export default function Home({
         handleSetFileName={handleSetFileName}
         handleHasSubmitted={handleHasSubmitted}
         handleSetFile={handleSetFile}
+        handleSetUserText={handleSetUserText}
       />
     </div>
   )

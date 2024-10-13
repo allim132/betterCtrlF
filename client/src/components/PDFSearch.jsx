@@ -1,79 +1,58 @@
-import React, { useState } from "react";
+import React, { useState } from "react"
 
-function PDFSearch() {
-  const [file, setFile] = useState(null);
-  const [query, setQuery] = useState("");
-  const [results, setResults] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-
-  const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
-  };
-
-  const handleQueryChange = (e) => {
-    setQuery(e.target.value);
-  };
+function PDFSearch({ file, query, hasBeenSubmitted }) {
+  const [results, setResults] = useState([])
+  const [error, setError] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setError(null);
+    e.preventDefault()
+    setIsLoading(true)
+    setError(null)
 
     if (!file || !query) {
-      setError("Please select a PDF file and enter a search query.");
-      setIsLoading(false);
-      return;
+      setError("Please select a PDF file and enter a search query.")
+      setIsLoading(false)
+      return
     }
 
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("query", query);
+    const formData = new FormData()
+    formData.append("file", file)
+    formData.append("query", query)
 
     try {
       const response = await fetch("http://localhost:5000/api/search", {
         method: "POST",
         body: formData,
-      });
+      })
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        throw new Error(`HTTP error! status: ${response.status}`)
       }
-      const data = await response.json();
-      setResults(data.results);
+      const data = await response.json()
+      setResults(data.results)
     } catch (error) {
-      console.error("Fetch error:", error);
-      setError("Failed to fetch. Please check your connection and try again.");
+      console.error("Fetch error:", error)
+      setError("Failed to fetch. Please check your connection and try again.")
+    } finally {
+      setIsLoading(false)
     }
-  };
+  }
 
   return (
     <div>
-      <h1>PDF Search</h1>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="file">Select PDF file:</label>
-          <input
-            type="file"
-            id="file"
-            accept=".pdf"
-            onChange={handleFileChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="query">Search query:</label>
-          <input
-            type="text"
-            id="query"
-            value={query}
-            onChange={handleQueryChange}
-          />
-        </div>
-        <button type="submit" disabled={isLoading}>
+        <button
+          type="submit"
+          disabled={isLoading}
+          className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
           {isLoading ? "Searching..." : "Search"}
         </button>
       </form>
 
       {error && <p style={{ color: "red" }}>{error}</p>}
+
+      {isLoading && <p>Loading...</p>}
 
       {results.length > 0 && (
         <div>
@@ -90,7 +69,7 @@ function PDFSearch() {
         </div>
       )}
     </div>
-  );
+  )
 }
 
-export default PDFSearch;
+export default PDFSearch

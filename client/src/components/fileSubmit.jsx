@@ -4,12 +4,13 @@ export default function FileSubmit({
   handleSetFileName,
   handleHasSubmitted,
   handleSetFile,
+  handleSetUserText,
 }) {
+  const [userText, setUserText] = useState("")
   const [file, setFile] = useState(null)
-  const [userText, setUserText] = useState("") // New state for user text input
 
   const handleFileChange = (event) => {
-    setFile(event.target.files)
+    setFile(event.target.files[0])
   }
 
   const handleTextChange = (event) => {
@@ -23,6 +24,9 @@ export default function FileSubmit({
       handleSetFileName(file.name)
       handleSetFile(file)
       handleHasSubmitted(true)
+
+      handleSetFile(file)
+      handleSetUserText(userText)
 
       console.log("File submitted:", file)
       console.log("User text:", userText) // Log the user input text

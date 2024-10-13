@@ -1,13 +1,14 @@
-import { useState } from "react";
+import { useState } from "react"
 
-import React from "react";
-import Home from "./pages/home";
-import DocViewer from "./pages/DocViewer";
+import React from "react"
+import Home from "./pages/home"
+import DocViewer from "./pages/DocViewer"
 
 function App() {
-  const [fileName, setFileName] = useState("");
-  const [hasSubmitted, setHasSubmitted] = useState(false);
-  const [file, setFile] = useState(null);
+  const [fileName, setFileName] = useState("")
+  const [hasSubmitted, setHasSubmitted] = useState(false)
+  const [file, setFile] = useState(null)
+  const [userText, setUserText] = useState("")
 
   return (
     <>
@@ -15,10 +16,11 @@ function App() {
         handleSetFileName={setFileName}
         handleHasSubmitted={setHasSubmitted}
         handleSetFile={setFile}
+        handleSetUserText={setUserText}
       />
-      <DocViewer fileName={fileName} hasSubmitted={hasSubmitted} file={file} />
+      <DocViewer file={file} query={userText} hasBeenSubmitted={hasSubmitted} />
     </>
-  );
+  )
 }
 
-export default App;
+export default App
