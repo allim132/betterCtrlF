@@ -1,8 +1,10 @@
 import { useState } from "react"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 
 import React from "react"
 import Home from "./pages/home"
 import DocViewer from "./pages/DocViewer"
+import { FileProvider } from "./components/FileProvider"
 
 function App() {
   const [fileName, setFileName] = useState("")
@@ -12,13 +14,33 @@ function App() {
 
   return (
     <>
-      <Home
-        handleSetFileName={setFileName}
-        handleHasSubmitted={setHasSubmitted}
-        handleSetFile={setFile}
-        handleSetUserText={setUserText}
-      />
-      <DocViewer file={file} query={userText} hasBeenSubmitted={hasSubmitted} />
+      <FileProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Home
+                  handleSetFileName={setFileName}
+                  handleHasSubmitted={setHasSubmitted}
+                  handleSetFile={setFile}
+                  handleSetUserText={setUserText}
+                />
+              }
+            />
+            <Route
+              path="/docviewer"
+              element={
+                <DocViewer
+                  file={file}
+                  query={userText}
+                  hasBeenSubmitted={hasSubmitted}
+                />
+              }
+            />
+          </Routes>
+        </BrowserRouter>
+      </FileProvider>
     </>
   )
 }

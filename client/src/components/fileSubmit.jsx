@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 export default function FileSubmit({
   handleSetFileName,
@@ -6,6 +7,7 @@ export default function FileSubmit({
   handleSetFile,
   handleSetUserText,
 }) {
+  const navigate = useNavigate()
   const [userText, setUserText] = useState("")
   const [file, setFile] = useState(null)
 
@@ -14,7 +16,7 @@ export default function FileSubmit({
   }
 
   const handleTextChange = (event) => {
-    setUserText(event.target.value) // Update state with user input
+    setUserText(event.target.value)
   }
 
   const handleSubmit = (event) => {
@@ -24,12 +26,13 @@ export default function FileSubmit({
       handleSetFileName(file.name)
       handleSetFile(file)
       handleHasSubmitted(true)
-
-      handleSetFile(file)
       handleSetUserText(userText)
 
       console.log("File submitted:", file)
-      console.log("User text:", userText) // Log the user input text
+      console.log("User text:", userText)
+
+      // Navigate to the docviewer page
+      navigate("/docviewer")
     } else {
       console.log("No file selected")
     }
