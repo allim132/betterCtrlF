@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 export default function FileSubmit({
   handleSetFileName,
@@ -7,40 +7,40 @@ export default function FileSubmit({
   handleSetFile,
   handleSetUserText,
 }) {
-  const navigate = useNavigate();
-  const [userText, setUserText] = useState("");
-  const [file, setFile] = useState(null);
+  const navigate = useNavigate()
+  const [userText, setUserText] = useState("")
+  const [file, setFile] = useState(null)
 
   const handleFileChange = (event) => {
-    setFile(event.target.files[0]);
-  };
+    setFile(event.target.files[0])
+  }
 
   const handleTextChange = (event) => {
-    setUserText(event.target.value);
-  };
+    setUserText(event.target.value)
+  }
 
   const handleSubmit = (event) => {
-    event.preventDefault();
+    event.preventDefault()
 
     if (file) {
-      handleSetFileName(file.name);
-      handleSetFile(file);
-      handleHasSubmitted(true);
-      handleSetUserText(userText);
+      handleSetFileName(file.name)
+      handleSetFile(file)
+      handleHasSubmitted(true)
+      handleSetUserText(userText)
 
-      console.log("File submitted:", file);
-      console.log("User text:", userText);
+      console.log("File submitted:", file)
+      console.log("User text:", userText)
 
       // Navigate to the docviewer page
-      navigate("/docviewer");
+      navigate("/docviewer")
     } else {
-      console.log("No file selected");
+      console.log("No file selected")
     }
-  };
+  }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="bg-white p-6 rounded shadow-md w-full max-w-md">
+    <div className="flex items-center justify-center bg-white pb-12">
+      <div className="bg-gray-200 p-6 rounded shadow-md w-full max-w-md">
         <h2 className="text-2xl font-bold mb-6 text-center">Upload PDF</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
@@ -84,5 +84,5 @@ export default function FileSubmit({
         </form>
       </div>
     </div>
-  );
+  )
 }
