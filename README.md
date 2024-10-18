@@ -6,4 +6,4 @@ We utilizied the RAG document and model recommended by Alex Jon Dilhoff, the lin
 https://github.com/ajdillhoff/langchain-llama3.2-rag
 https://ajdillhoff.github.io/articles/using-rag-to-talk-to-your-data/
 
-Made in collaboration with Mia Sorola Yoshida, Kathleen Paz, and Alex Nguyen.
+Made in collaboration with Mia Sorola Yoshida and Alex Nguyen.
